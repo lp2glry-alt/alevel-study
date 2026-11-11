@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A-Level Study Hub</title>
+<style>
+:root{--bg:#f6f7fb;--fg:#14181f;--mut:#5b6575;--card:#fff;--bd:#d9dee7;--ac:#2563eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1420;--fg:#e7ecf5;--mut:#98a3b8;--card:#151e2e;--bd:#26324a}}
+:root[data-theme="dark"]{--bg:#0d1420;--fg:#e7ecf5;--mut:#98a3b8;--card:#151e2e;--bd:#26324a}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--bd);background:var(--card);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+header a{color:var(--fg);text-decoration:none;font-weight:700;font-size:18px}
+button{font:inherit;cursor:pointer}
+.tg{background:none;border:1px solid var(--bd);color:var(--fg);border-radius:8px;padding:4px 10px}
+main{max-width:860px;margin:0 auto;padding:24px 18px 60px}
+h1{font-size:30px;margin:.2em 0}h2{margin-top:1.6em}h3{margin-bottom:.3em}
+.mut{color:var(--mut)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-left:6px solid var(--c,var(--ac));border-radius:12px;padding:18px;display:block;color:inherit;text-decoration:none}
+a.card:hover{border-color:var(--c)}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--bd);margin:16px 0;overflow-x:auto}
+.tabs button{background:none;border:0;padding:10px 14px;color:var(--mut);border-bottom:3px solid transparent;white-space:nowrap}
+.tabs button.on{color:var(--fg);border-color:var(--c)}
+table{border-collapse:collapse;width:100%}th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left}
+.sc{overflow-x:auto}
+code{background:var(--card);border:1px solid var(--bd);border-radius:5px;padding:1px 5px}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 18px;margin:14px 0}
+.q{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 18px;margin:12px 0}
+.q .a{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd)}
+.q.open .a{display:block}
+.q button{background:var(--c);color:#fff;border:0;border-radius:8px;padding:6px 12px;margin-right:8px}
+.q button.sec{background:none;color:var(--fg);border:1px solid var(--bd)}
+.bits{display:flex;gap:6px;flex-wrap:wrap}
+.bits button{width:46px;height:62px;border-radius:8px;border:2px solid var(--c);background:none;color:var(--fg);font-weight:700}
+.bits button.on{background:var(--c);color:#fff}.bits small{display:block;font-weight:400;font-size:11px}
+.bar{height:8px;background:var(--bd);border-radius:8px;overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;background:var(--c)}
+.crumb a{color:var(--ac)}
+</style></head><body>
+<header><a href="#">A-Level Study Hub</a><button class="tg" id="tg">Theme</button></header>
+<main id="app"></main>
+<script>
+const S={
+cs:{name:'Computer Science',board:'Cambridge International 9618',c:'#0d9488',topics:{
+'1-1':{t:'1.1 Data representation',spec:['User-defined data types (also see later topics)','Binary, denary, hexadecimal and BCD, and converting between them','Where hex and BCD are used, and why','Character sets: ASCII, extended ASCII and Unicode','Two’s complement, binary addition and subtraction, overflow'],
+guide:`<h2>Number systems</h2><ul><li><b>Denary</b> is base 10, <b>binary</b> base 2, <b>hexadecimal</b> base 16 (0–9, A–F where A=10 … F=15).</li><li><b>Binary ↔ hex:</b> split into groups of 4 bits from the right. <code>1011 0111</code> = <code>B7</code>.</li><li><b>Why hex:</b> shorter, easier for humans to read and less error-prone, and each hex digit maps to exactly 4 bits. Used for memory addresses, MAC addresses, colour codes and error messages.</li><li><b>BCD:</b> each denary digit stored in its own 4 bits. 157 = <code>0001 0101 0111</code>. Used in calculators, digital clocks and displays because decimal digits are exact and easy to show.</li></ul>
+<h2>Character sets</h2><ul><li><b>ASCII:</b> 7 bits, 128 characters. <b>Extended ASCII:</b> 8 bits, 256 characters. <b>Unicode:</b> up to 32 bits per character, covers nearly every language and emoji.</li><li>Trade-off: Unicode supports far more characters but needs more storage per character.</li><li>Anchors: <code>A</code>=65, <code>a</code>=97, <code>0</code>=48.</li></ul>
+<h2>Two’s complement</h2><ul><li>The MSB has a <i>negative</i> place value. In 8 bits: −128, 64, 32, 16, 8, 4, 2, 1. Range: −128 to +127.</li><li>To negate: <b>invert all bits, then add 1</b>.</li></ul>
+<div class="box"><b>Worked example: −45 in 8 bits</b><br>+45 = <code>0010 1101</code> → invert <code>1101 0010</code> → add 1 → <code>1101 0011</code></div>
+<h2>Binary addition and overflow</h2><ul><li>0+0=0, 0+1=1, 1+1=10 (carry 1), 1+1+1=11 (carry 1).</li><li><b>Overflow:</b> the result needs more bits than are available. In two’s complement, two positives giving a negative (or vice versa) signals overflow.</li><li><b>Subtraction:</b> add the two’s complement of the number being subtracted.</li></ul>
+<div class="box"><b>Worked example: 100 − 45</b><br><code>0110 0100 + 1101 0011 = 1 0011 0111</code>. Discard the carry out of the 8th bit: <code>0011 0111</code> = 55.</div>
+<h2>Exam tips</h2><ul><li>Show working (“invert, add 1”) for method marks.</li><li>State the number of bits you are using.</li><li>For “why hex?” give a specific reason, not just “it’s easier”.</li></ul>`,
+tool:'bits',
+qs:[['Convert 10110110 to denary, hex, and write 182 in BCD.','Denary 182. Hex B6. BCD: 0001 1000 0010.'],['Write −100 in 8-bit two’s complement.','100 = 01100100, invert = 10011011, add 1 = 10011100.'],['Add 01111000 and 01100000 in 8-bit two’s complement. What happens?','120 + 96 = 216 gives 11011000, which reads as −40. Overflow: the true answer exceeds +127 so the sign bit is wrong.'],['Give two reasons Unicode is used instead of ASCII.','It represents far more characters (all languages, symbols, emoji), and it is one international standard so text displays consistently across systems.']]}}},
+eco:{name:'Economics',board:'Edexcel A 9EC0',c:'#d97706',topics:{
+'1-1':{t:'Theme 1: Economics as a social science',spec:['Economics as a social science: models, ceteris paribus, rational decision-making','The economic problem: scarcity, choice, opportunity cost, factors of production','Production possibility frontiers','Specialisation and the division of labour','Free market, mixed and command economies','Positive and normative statements'],
+guide:`<h2>Economics as a social science</h2><ul><li>Studies how people, firms and governments make choices with scarce resources.</li><li>Uses the scientific method: observe, build a <b>model</b>, test against data, refine.</li><li><b>Ceteris paribus</b> (“all else equal”) isolates one variable. Models simplify reality, so they cannot predict behaviour perfectly.</li><li>Assumes <b>rational</b> decisions (consumers maximise utility, firms maximise profit). Behavioural economics challenges this.</li></ul>
+<h2>The economic problem</h2><ul><li><b>Scarcity:</b> limited resources against unlimited wants, which forces <b>choice</b>.</li><li><b>Factors of production:</b> land (rent), labour (wages), capital (interest), enterprise (profit).</li><li><b>Opportunity cost:</b> the value of the next best alternative given up.</li><li>Every economy answers: <i>what, how and for whom</i> to produce.</li></ul>
+<h2>Production possibility frontiers</h2><ul><li>Show the maximum combinations of two goods when resources are fully and efficiently used.</li><li><b>On</b> the curve: efficient. <b>Inside:</b> unemployed or inefficient use. <b>Outside:</b> unattainable now.</li><li>Slope shows opportunity cost. A bowed-out curve means increasing opportunity cost.</li><li><b>Outward shift</b> = growth (more or better resources, technology, education). <b>Inward shift</b> = war, disaster, population loss.</li></ul>
+<h2>Specialisation and division of labour</h2><ul><li><b>Benefits:</b> higher productivity, lower unit costs, economies of scale, faster training.</li><li><b>Drawbacks:</b> boredom and low morale, over-reliance on others, structural unemployment if skills become obsolete.</li></ul>
+<h2>Economic systems</h2><div class="sc"><table><tr><th>System</th><th>Allocation</th><th>Strengths</th><th>Weaknesses</th></tr><tr><td>Free market</td><td>Price mechanism</td><td>Efficiency, innovation, choice</td><td>Inequality, market failure</td></tr><tr><td>Command</td><td>Government planning</td><td>Equality, public goods</td><td>Inefficiency, shortages, weak incentives</td></tr><tr><td>Mixed</td><td>Both</td><td>Balances efficiency and equity</td><td>Government failure</td></tr></table></div>
+<h2>Positive vs normative</h2><ul><li><b>Positive:</b> can be tested with evidence (“Unemployment rose by 0.5%”).</li><li><b>Normative:</b> a value judgement (“The government <i>should</i> cut unemployment”). Watch for <i>should, ought, fair, better</i>.</li></ul>
+<h2>Exam tips</h2><ul><li>Essays: define, analyse (chains of reasoning), evaluate (short vs long run, magnitude, assumptions), then judge.</li><li>Label PPF axes and draw the shift with an arrow.</li><li>Use real examples (NHS funding, supply chains).</li></ul>`,
+qs:[['Explain, using a PPF, the opportunity cost of increased spending on healthcare.','Healthcare on one axis, other goods on the other. Moving along the curve to more healthcare means fewer other goods; the slope shows that trade-off. Note opportunity cost rises if resources are not equally suited to both.'],['Distinguish between a positive and a normative statement, with an example of each.','Positive: testable fact (“Inflation was 2% in 2023”). Normative: value judgement (“Inflation should be lower”).'],['Evaluate the view that a mixed economy is more efficient than a command economy. (12 marks)','Analyse price mechanism, incentives and information versus planning. Evaluate: government failure in mixed economies, equity benefits of planning, degree of mix, short vs long run. Reach a judgement.']]}}},
+es:{name:'Spanish',board:'AQA 7692',c:'#e11d48',topics:{
+'1-1':{t:'1.1 Los cambios en la familia',spec:['Social issues and trends in the Spanish-speaking world','Changing family structures and attitudes','Roles of men and women, work–life balance, ageing population'],
+guide:`<h2>Vocabulario clave</h2><div class="sc"><table><tr><th>Español</th><th>English</th></tr><tr><td>la familia monoparental</td><td>single-parent family</td></tr><tr><td>la familia numerosa</td><td>large family</td></tr><tr><td>la familia reconstituida</td><td>blended family</td></tr><tr><td>la pareja de hecho</td><td>unmarried couple</td></tr><tr><td>el matrimonio igualitario</td><td>same-sex marriage</td></tr><tr><td>el divorcio, la separación</td><td>divorce, separation</td></tr><tr><td>la adopción</td><td>adoption</td></tr><tr><td>la conciliación laboral y familiar</td><td>work–life balance</td></tr><tr><td>la baja por paternidad</td><td>paternity leave</td></tr><tr><td>el índice de natalidad</td><td>birth rate</td></tr><tr><td>el envejecimiento de la población</td><td>ageing population</td></tr><tr><td>la brecha generacional</td><td>generation gap</td></tr><tr><td>la igualdad de género</td><td>gender equality</td></tr></table></div>
+<h2>Ideas clave</h2><ul><li><b>Familias más diversas:</b> más familias monoparentales, parejas de hecho y familias reconstituidas.</li><li><b>Menos hijos y más tarde:</b> España tiene una de las natalidades más bajas de Europa.</li><li><b>Cambios legales:</b> el matrimonio homosexual se legalizó en 2005 y el divorcio se hizo más fácil.</li><li><b>Roles de género:</b> más mujeres trabajan fuera de casa y los padres asumen más cuidado de los hijos.</li><li><b>Jóvenes y mayores:</b> los jóvenes se independizan más tarde (paro, precio de la vivienda); el envejecimiento plantea el cuidado de los mayores.</li></ul>
+<h2>Gramática útil</h2><ul><li><b>Subjuntivo</b> con opiniones: <i>Es importante que los padres pasen tiempo con sus hijos.</i></li><li><b>Imperfecto vs pretérito</b> (antes/ahora): <i>Antes, la mujer se quedaba en casa; ahora trabaja fuera.</i></li><li><b>Si-clauses:</b> <i>Si tuviera hijos, compartiría las tareas.</i></li><li><b>Conectores:</b> sin embargo, por otro lado, a pesar de que, en cambio, no solo… sino también.</li></ul>
+<h2>Frases modelo</h2><ul><li><i>La familia tradicional ya no es el único modelo aceptado en la sociedad española.</i></li><li><i>A pesar de que ha aumentado la igualdad, las mujeres siguen asumiendo la mayor parte de las tareas domésticas.</i></li></ul>
+<h2>Consejos de examen</h2><ul><li>Da una opinión clara con pruebas (datos, leyes, ejemplos del mundo hispano).</li><li>Demuestra variedad: subjuntivo, condicional, pasiva, conectores.</li></ul>`,
+qs:[['Translate: “Nowadays, many young people live with their parents until they are thirty because housing is too expensive.”','Hoy en día, muchos jóvenes viven con sus padres hasta los treinta años porque la vivienda es demasiado cara.'],['Write 120 words: ¿Es la familia tradicional todavía importante hoy en día?','Plan: opinión; 2 argumentos a favor; 1 en contra; conclusión. Use subjuntivo (Es importante que…) and a connector such as sin embargo.'],['Oral (1 min): ¿Cómo ha cambiado el papel del padre en la familia?','Use antes/ahora with imperfect and present, mention la baja por paternidad, and finish with an opinion.']]}}}};
+const $=s=>document.querySelector(s),app=$('#app');
+let done={};try{done=JSON.parse(localStorage.getItem('done')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('done',JSON.stringify(done))}catch(e){}};
+function home(){let h='<h1>A-Level Study Hub</h1><p class="mut">Spec-matched notes and practice for your three A-levels. Pick a subject to start.</p><div class="grid">';
+for(const k in S){const s=S[k],n=Object.keys(s.topics).length;h+=`<a class="card" style="--c:${s.c}" href="#${k}-1-1"><h3>${s.name}</h3><div class="mut">${s.board}</div><p>${n} topic live. More to come.</p></a>`}
+app.innerHTML=h+'</div>'}
+function topic(k,id,tab){const s=S[k],t=s.topics[id];if(!t)return home();
+const tabs={ov:'Overview',gd:'Study guide',pr:'Practice'};
+let h=`<div style="--c:${s.c}"><div class="crumb"><a href="#">Home</a> / ${s.name}</div><h1>${t.t}</h1><div class="mut">${s.board}</div><div class="tabs">`+
+Object.keys(tabs).map(x=>`<button data-t="${x}" class="${x==tab?'on':''}">${tabs[x]}</button>`).join('')+'</div>';
+if(tab=='ov'){h+='<div class="box"><b>Syllabus points covered</b><ul>'+t.spec.map(x=>`<li>${x}</li>`).join('')+'</ul><p class="mut">Check the official specification for the exact wording of each learning objective.</p></div>';if(t.tool)h+='<h3>Try it: build a number</h3><div class="bits" id="bits"></div><p id="bv"></p>'}
+if(tab=='gd')h+=t.guide;
+if(tab=='pr'){const d=t.qs.filter((q,i)=>done[k+id+i]).length;h+=`<p>${d} of ${t.qs.length} checked off</p><div class="bar"><i style="width:${100*d/t.qs.length}%"></i></div>`+t.qs.map((q,i)=>`<div class="q" data-i="${i}"><b>${i+1}.</b> ${q[0]}<div style="margin-top:10px"><button class="show">Show answer</button><button class="sec tick">${done[k+id+i]?'Done ✓':'Mark done'}</button></div><div class="a">${q[1]}</div></div>`).join('')}
+app.innerHTML=h+'</div>';
+app.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{location.hash=`${k}-${id}-${b.dataset.t}`});
+app.querySelectorAll('.q').forEach(q=>{q.querySelector('.show').onclick=()=>q.classList.toggle('open');q.querySelector('.tick').onclick=()=>{const key=k+id+q.dataset.i;done[key]=!done[key];save();topic(k,id,'pr')}});
+if(tab=='ov'&&t.tool){const v=Array(8).fill(0),b=$('#bits');const up=()=>{const n=v.reduce((a,x)=>a*2+x,0);$('#bv').innerHTML=`<b>${n}</b> in denary, <b>0x${n.toString(16).toUpperCase().padStart(2,'0')}</b> in hex`;b.querySelectorAll('button').forEach((e,i)=>e.className=v[i]?'on':'')};
+v.forEach((_,i)=>{const e=document.createElement('button');e.innerHTML=`0<small>${128>>i}</small>`;e.onclick=()=>{v[i]^=1;e.firstChild.nodeValue=v[i];up()};b.appendChild(e)});up()}}
+function route(){const p=location.hash.slice(1).split('-');if(p.length<3)return home();topic(p[0],p[1]+'-'+p[2],p[3]||'ov');scrollTo(0,0)}
+addEventListener('hashchange',route);route();
+$('#tg').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark'};
+</script></body></html>
